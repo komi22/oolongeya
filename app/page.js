@@ -29,8 +29,9 @@ const vulnerabilities = [
     id: "CVE-2026-3589",
     scoreValue: "7.5",
     grade: "High",
-    title: "WooCommerce Arbitrary Admin User Creation via CSRF",
-    badge: "Verified · 2억+ 누적 다운로드",
+    title: "Arbitrary Admin User Creation via CSRF",
+    product: "WooCommerce",
+    badge: "Verified · 200M+ downloads",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
@@ -75,7 +76,7 @@ const bugBounties = [
     icon: "",
     lock: true,
     description:
-      "API 악용을 통해 인증되지 않은 접근 및 대규모 정보 노출이 가능합니다.",
+      "Unauthenticated access and large-scale data exposure are possible through API abuse.",
   },
   {
     program: "PayPal",
@@ -304,14 +305,14 @@ export default function Home() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
-                      <div className="mt-1 flex flex-wrap items-center gap-2">
-                        <p className="text-ink-300">{v.title}</p>
-                        {v.badge ? (
-                          <span className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
-                            {v.badge}
-                          </span>
-                        ) : null}
-                      </div>
+                      <p className="mt-1 text-ink-300">{v.title}</p>
+                      {v.product || v.badge ? (
+                        <p className="mt-1 text-xs text-ink-400">
+                          {v.product ? v.product : ""}
+                          {v.product && v.badge ? " | " : ""}
+                          {v.badge ? v.badge : ""}
+                        </p>
+                      ) : null}
                     </div>
                     <div className="flex items-center gap-3">
                       <span className={`font-ui text-xs font-semibold ${scoreTone(v.grade)}`}>
@@ -368,11 +369,12 @@ export default function Home() {
                       </p>
                       <p className="mt-1">{item.type}</p>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="font-ui text-xs text-ink-500">{item.year}</span>
+                      <span className="font-ui text-xs text-ink-600">|</span>
                       <span className={`font-ui text-xs font-semibold ${scoreTone(item.grade)}`}>
                         {riskText(item.scoreValue, item.grade)}
                       </span>
-                      <span className="font-ui text-xs text-ink-500">{item.year}</span>
                       <span className="font-ui text-emerald-400">{item.payout}</span>
                       <span className={`text-ink-500 transition-transform ${isOpen ? "rotate-45" : "rotate-0"}`}>+</span>
                     </div>
