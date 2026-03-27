@@ -31,7 +31,8 @@ const vulnerabilities = [
     grade: "High",
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
-    badge: "200M+ downloads",
+    badgeLabel: "verified badge",
+    badgeValue: "200M+ downloads",
     badgeIcon: "/icons/verified-badge.svg",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
@@ -41,6 +42,10 @@ const vulnerabilities = [
     scoreValue: "7.5",
     grade: "High",
     title: "Admin Privilege Escalation",
+    product: "Report Solution",
+    badgeLabel: "verified badge",
+    badgeValue: "Korea Certified",
+    badgeIcon: "/icons/verified-badge.svg",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
@@ -49,6 +54,10 @@ const vulnerabilities = [
     scoreValue: "7.5",
     grade: "High",
     title: "Admin Privilege Escalation",
+    product: "Report Solution",
+    badgeLabel: "verified badge",
+    badgeValue: "Korea Certified",
+    badgeIcon: "/icons/verified-badge.svg",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
@@ -309,11 +318,13 @@ export default function Home() {
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
                       <p className="mt-1 text-ink-300">{v.title}</p>
-                      {v.product || v.badge ? (
-                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-ink-400">
+                      {v.product || v.badgeLabel || v.badgeValue ? (
+                        <div className="mt-1 flex flex-col items-start text-xs leading-relaxed text-ink-400">
                           {v.product ? <span>{v.product}</span> : null}
-                          {v.product && v.badge ? <span>|</span> : null}
-                          {v.badge ? (
+                          {v.product && (v.badgeLabel || v.badgeValue) ? (
+                            <span className="text-ink-600">|</span>
+                          ) : null}
+                          {v.badgeLabel ? (
                             <span className="inline-flex items-center gap-1">
                               {v.badgeIcon ? (
                                 <Image
@@ -324,9 +335,10 @@ export default function Home() {
                                   className="h-3 w-3"
                                 />
                               ) : null}
-                              <span>{v.badge}</span>
+                              <span>{v.badgeLabel}</span>
                             </span>
                           ) : null}
+                          {v.badgeValue ? <span>{v.badgeValue}</span> : null}
                         </div>
                       ) : null}
                     </div>
@@ -352,7 +364,7 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <p className="mt-1 font-ui text-xs font-semibold tracking-wide text-emerald-300">
+        <p className="mt-1 inline-flex rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
           Total: ${bountyTotalFormatted}
         </p>
         <ul className="mt-5 divide-y divide-ink-700/60">
