@@ -31,7 +31,7 @@ const vulnerabilities = [
     grade: "High",
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
-    badge: "Verified · 200M+ downloads",
+    badge: "✅ 200M+ downloads",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
@@ -136,6 +136,8 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroShift, setHeroShift] = useState(0);
   const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b.payout) - payoutToNumber(a.payout));
+  const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item.payout), 0);
+  const bountyTotalFormatted = new Intl.NumberFormat("en-US").format(bountyTotal);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -289,7 +291,7 @@ export default function Home() {
       <section id="vulnerabilities" className="mb-12 reveal">
         <h2 className="inline-flex items-center gap-2 font-ui text-2xl text-ink-50">
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
-          <span>Vulnerabilities</span>
+          <span>Vulnerability Reports</span>
         </h2>
         <ul className="mt-5 divide-y divide-ink-700/60">
           {vulnerabilities.map((v, idx) => {
@@ -336,6 +338,9 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
+        <p className="mt-1 font-ui text-xs font-semibold tracking-wide text-emerald-300">
+          Total: ${bountyTotalFormatted}
+        </p>
         <ul className="mt-5 divide-y divide-ink-700/60">
           {sortedBugBounties.map((item, idx) => {
             const isOpen = openBounty === idx;
