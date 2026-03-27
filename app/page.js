@@ -267,7 +267,7 @@ export default function Home() {
           {workExperiences.map((item, idx) => {
             const isOpen = openExp === idx;
             return (
-              <article key={`${item.period}-${item.title}`} className="py-3">
+              <article key={`${item.period}-${item.title}`} className="mood-card py-3 px-2 sm:px-3">
                 <button
                   type="button"
                   className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
@@ -305,7 +305,7 @@ export default function Home() {
           {vulnerabilities.map((v, idx) => {
             const isOpen = openVuln === idx;
             return (
-              <li key={v.id} className="py-3 text-sm">
+              <li key={v.id} className="mood-card py-3 px-2 text-sm sm:px-3">
                 <button
                   type="button"
                   className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
@@ -361,7 +361,7 @@ export default function Home() {
           {sortedBugBounties.map((item, idx) => {
             const isOpen = openBounty === idx;
             return (
-              <li key={`${item.program}-${item.type}-${item.payout}`} className="py-3 text-sm text-ink-300">
+              <li key={`${item.program}-${item.type}-${item.payout}`} className="mood-card py-3 px-2 text-sm text-ink-300 sm:px-3">
                 <button
                   type="button"
                   className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
