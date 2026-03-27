@@ -399,7 +399,13 @@ export default function Home() {
                     <div>
                       <p className="inline-flex items-center gap-1.5 font-semibold text-ink-100">
                         {item.icon ? (
-                          <Image src={item.icon} alt={item.program} width={14} height={14} className="h-3.5 w-3.5" />
+                          <Image
+                            src={item.icon}
+                            alt={item.program}
+                            width={16}
+                            height={16}
+                            className="h-4 w-4 rounded-sm object-cover"
+                          />
                         ) : null}
                         {item.program}
                       </p>
