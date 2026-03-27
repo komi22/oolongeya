@@ -248,6 +248,15 @@ export default function Home() {
             </p>
             <p className="mt-4 text-sm sm:text-[15px]">
               <a
+                href="mailto:oolongeya@gmail.com"
+                className="inline-flex items-center gap-2 text-ink-300 hover:text-accent transition-colors"
+              >
+                <Image src="/icons/gmail.svg" alt="Gmail" width={14} height={14} className="h-3.5 w-3.5" />
+                oolongeya@gmail.com
+              </a>
+            </p>
+            <p className="mt-2 text-sm sm:text-[15px]">
+              <a
                 href="https://dreamhack.io/users/11533"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -279,11 +288,13 @@ export default function Home() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-ko text-sm text-accent">{item.period}</p>
-                      <h3 className="mt-1 text-base font-semibold text-ink-100">{item.title}</h3>
+                      <h3 className="text-base font-semibold text-ink-100">{item.title}</h3>
                       <p className="mt-1 text-sm text-ink-400">{item.org}</p>
                     </div>
-                    <span className={`pt-1 text-ink-500 transition-transform ${isOpen ? "rotate-45" : "rotate-0"}`}>+</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-ui text-xs text-ink-500">{item.period}</span>
+                      <span className={`text-ink-500 transition-transform ${isOpen ? "rotate-45" : "rotate-0"}`}>+</span>
+                    </div>
                   </div>
                 </button>
                 <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pt-2" : "grid-rows-[0fr]"}`}>
