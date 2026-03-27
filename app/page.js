@@ -203,9 +203,9 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-8" lang="en">
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] bg-transparent">
+      <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[2px] bg-ink-900/20">
         <div
-          className="h-full rounded-r-full bg-gradient-to-r from-accent via-sky-300 to-signal transition-[width] duration-150"
+          className="h-full rounded-r-sm bg-ink-300/45 transition-[width] duration-200"
           style={{ width: `${Math.max(0, Math.min(100, scrollProgress * 100))}%` }}
         />
       </div>
