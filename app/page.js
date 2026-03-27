@@ -321,7 +321,7 @@ export default function Home() {
                           {v.badgeIcon ? (
                             <Image
                               src={v.badgeIcon}
-                              alt="verified badge"
+                              alt="verification"
                               width={12}
                               height={12}
                               className="h-3 w-3"
@@ -349,11 +349,11 @@ export default function Home() {
       </section>
 
       <section id="bug-bounty" className="mb-14 reveal">
-        <h2 className="inline-flex items-center gap-2 font-ui text-2xl text-ink-50">
+        <h2 className="flex items-center gap-2 font-ui text-2xl text-ink-50">
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <p className="mt-1 inline-flex rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
+        <p className="mt-1 inline-flex w-fit rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
           Total: ${bountyTotalFormatted}
         </p>
         <ul className="mt-5 divide-y divide-ink-700/60">
