@@ -53,11 +53,12 @@
 
   .mood-hover:hover,
   .mood-hover:focus-visible {
-    color: #eef6ff;
+    color: #fff6de;
     text-shadow:
-      0 0 8px rgba(90, 169, 255, 0.26),
-      0 0 16px rgba(90, 169, 255, 0.16);
-    filter: drop-shadow(0 0 10px rgba(90, 169, 255, 0.18));
+      0 0 6px rgba(255, 226, 160, 0.38),
+      0 0 14px rgba(255, 200, 110, 0.26),
+      0 0 24px rgba(255, 176, 78, 0.16);
+    filter: drop-shadow(0 0 10px rgba(255, 205, 120, 0.2));
   }
 }
 
