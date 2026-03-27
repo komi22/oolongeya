@@ -240,9 +240,8 @@ export default function Home() {
             </h1>
             <p className="mt-2 text-lg font-semibold text-ink-100">Offensive Security Engineer</p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-ink-300 sm:text-[15px]">
-              Red team work and pen testing at a financial company in South Korea.
-              <br />
-              started Web Hacking CTF in 2022 and Bug Bounty in 2026.
+              Performed red teaming and penetration testing at a financial company in South Korea. Began
+              participating in CTF competitions in 2022 and bug bounty programs in 2026.
             </p>
             <p className="mt-4 text-sm sm:text-[15px]">
               <a
