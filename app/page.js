@@ -31,7 +31,6 @@ const vulnerabilities = [
     grade: "High",
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
-    badgeLabel: "verified badge",
     badgeValue: "200M+ downloads",
     badgeIcon: "/icons/verified-badge.svg",
     description:
@@ -43,7 +42,6 @@ const vulnerabilities = [
     grade: "High",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
-    badgeLabel: "verified badge",
     badgeValue: "Korea Certified",
     badgeIcon: "/icons/verified-badge.svg",
     description:
@@ -55,7 +53,6 @@ const vulnerabilities = [
     grade: "High",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
-    badgeLabel: "verified badge",
     badgeValue: "Korea Certified",
     badgeIcon: "/icons/verified-badge.svg",
     description:
@@ -318,25 +315,17 @@ export default function Home() {
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
                       <p className="mt-1 text-ink-300">{v.title}</p>
-                      {v.product || v.badgeLabel || v.badgeValue ? (
-                        <div className="mt-1 flex flex-col items-start text-xs leading-relaxed text-ink-400">
+                      {v.product || v.badgeValue ? (
+                        <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-400">
                           {v.product ? <span>{v.product}</span> : null}
-                          {v.product && (v.badgeLabel || v.badgeValue) ? (
-                            <span className="text-ink-600">|</span>
-                          ) : null}
-                          {v.badgeLabel ? (
-                            <span className="inline-flex items-center gap-1">
-                              {v.badgeIcon ? (
-                                <Image
-                                  src={v.badgeIcon}
-                                  alt="verified badge"
-                                  width={12}
-                                  height={12}
-                                  className="h-3 w-3"
-                                />
-                              ) : null}
-                              <span>{v.badgeLabel}</span>
-                            </span>
+                          {v.badgeIcon ? (
+                            <Image
+                              src={v.badgeIcon}
+                              alt="verified badge"
+                              width={12}
+                              height={12}
+                              className="h-3 w-3"
+                            />
                           ) : null}
                           {v.badgeValue ? <span>{v.badgeValue}</span> : null}
                         </div>
