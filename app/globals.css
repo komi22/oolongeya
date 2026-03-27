@@ -56,16 +56,21 @@
     transition: transform 220ms ease;
   }
 
-  .mood-card:hover .text-ink-100,
-  .mood-card:focus-within .text-ink-100,
-  .mood-card:hover .text-ink-300,
-  .mood-card:focus-within .text-ink-300,
-  .mood-card:hover .text-ink-400,
-  .mood-card:focus-within .text-ink-400,
-  .mood-card:hover .text-ink-500,
-  .mood-card:focus-within .text-ink-500 {
-    color: #ffe8b5 !important;
-    text-shadow: 0 0 8px rgba(255, 214, 138, 0.26);
+  .mood-card :is(h1, h2, h3, p, span, a, li, small, strong, em) {
+    transition: text-shadow 240ms ease, filter 240ms ease;
+  }
+
+  .mood-card:hover :is(h1, h2, h3, p, span, a, li, small, strong, em),
+  .mood-card:focus-within :is(h1, h2, h3, p, span, a, li, small, strong, em) {
+    text-shadow:
+      0 0 6px rgba(255, 225, 165, 0.28),
+      0 0 16px rgba(255, 188, 92, 0.2),
+      0 0 28px rgba(255, 156, 66, 0.12);
+  }
+
+  .mood-card:hover :is(svg, img),
+  .mood-card:focus-within :is(svg, img) {
+    filter: drop-shadow(0 0 7px rgba(255, 196, 102, 0.25));
   }
 }
 
