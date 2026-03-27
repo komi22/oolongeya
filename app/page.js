@@ -14,13 +14,15 @@ const workExperiences = [
     period: "2026 -",
     title: "Meritz Securities",
     org: "Offensive Security Engineer",
-    details: ["Red team work and penetration testing in financial environment."],
+    details: ["Red teaming and penetration testing in WEB/APP environments."],
   },
   {
     period: "2025",
-    title: "Best of Best 14",
-    org: "KITRI",
-    details: ["Security Consulting Track"],
+    title: "KITRI Best of Best",
+    org: "14th Security Consulting Track",
+    details: [
+      "I have gained expertise in establishing and evaluating end-to-end information security processes within given environments.",
+    ],
   },
 ];
 
@@ -42,7 +44,7 @@ const vulnerabilities = [
     grade: "High",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
-    badgeValue: "Korea Certified",
+    badgeValue: "KISA Certified",
     badgeIcon: "/icons/verified-badge.svg",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
@@ -53,7 +55,7 @@ const vulnerabilities = [
     grade: "High",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
-    badgeValue: "Korea Certified",
+    badgeValue: "KISA Certified",
     badgeIcon: "/icons/verified-badge.svg",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
@@ -353,7 +355,7 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <p className="mt-1 inline-flex w-fit rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
+        <p className="mt-3 inline-flex w-fit rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
           Total: ${bountyTotalFormatted}
         </p>
         <ul className="mt-5 divide-y divide-ink-700/60">
