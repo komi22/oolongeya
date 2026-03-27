@@ -14,12 +14,14 @@ const workExperiences = [
     period: "2026 -",
     title: "Meritz Securities",
     org: "Offensive Security Engineer",
+    icon: "/icons/meritz.png",
     details: ["Red teaming and penetration testing in WEB/APP environments."],
   },
   {
     period: "2025",
     title: "KITRI Best of Best",
     org: "14th Security Consulting Track",
+    icon: "/icons/kitri.png",
     details: [
       "I have gained expertise in establishing and evaluating end-to-end information security processes within given environments.",
     ],
@@ -288,7 +290,18 @@ export default function Home() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="text-base font-semibold text-ink-100">{item.title}</h3>
+                      <h3 className="inline-flex items-center gap-2 text-base font-semibold text-ink-100">
+                        {item.icon ? (
+                          <Image
+                            src={item.icon}
+                            alt={item.title}
+                            width={16}
+                            height={16}
+                            className="h-4 w-4 rounded-sm object-cover"
+                          />
+                        ) : null}
+                        <span>{item.title}</span>
+                      </h3>
                       <p className="mt-1 text-sm text-ink-400">{item.org}</p>
                     </div>
                     <div className="flex items-center gap-2">
