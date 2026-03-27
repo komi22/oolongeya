@@ -271,7 +271,7 @@ export default function Home() {
               <article key={`${item.period}-${item.title}`} className="py-3">
                 <button
                   type="button"
-                  className="w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
+                  className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
                   aria-expanded={isOpen}
                   onClick={() => setOpenExp(isOpen ? -1 : idx)}
                 >
@@ -309,7 +309,7 @@ export default function Home() {
               <li key={v.id} className="py-3 text-sm">
                 <button
                   type="button"
-                  className="w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
+                  className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
                   aria-expanded={isOpen}
                   onClick={() => setOpenVuln(isOpen ? -1 : idx)}
                 >
@@ -365,7 +365,7 @@ export default function Home() {
               <li key={`${item.program}-${item.type}-${item.payout}`} className="py-3 text-sm text-ink-300">
                 <button
                   type="button"
-                  className="w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
+                  className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
                   aria-expanded={isOpen}
                   onClick={() => setOpenBounty(isOpen ? -1 : idx)}
                 >

@@ -45,6 +45,39 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .mood-hover {
+    position: relative;
+    border-radius: 0.75rem;
+    transition: box-shadow 260ms ease, transform 220ms ease, background-color 220ms ease;
+  }
+
+  .mood-hover::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(90, 169, 255, 0.22), transparent 62%),
+      radial-gradient(100% 80% at 50% 120%, rgba(255, 157, 92, 0.16), transparent 62%);
+    transition: opacity 260ms ease;
+  }
+
+  .mood-hover:hover::before,
+  .mood-hover:focus-visible::before {
+    opacity: 1;
+  }
+
+  .mood-hover:hover,
+  .mood-hover:focus-visible {
+    box-shadow:
+      0 0 0 1px rgba(152, 178, 255, 0.22),
+      0 0 24px rgba(90, 169, 255, 0.2),
+      0 0 40px rgba(255, 157, 92, 0.12);
+    background-color: rgba(255, 255, 255, 0.015);
+  }
 }
 
 .grain::before {
