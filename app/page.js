@@ -95,6 +95,7 @@ const bugBounties = [
     payout: "$400",
     year: "2026",
     icon: "/icons/paypal.svg",
+    certification: "HackerOne Certified",
     description:
       "A malicious phishing link under a PayPal domain can be generated and redirect users to a malicious site when clicked.",
   },
@@ -106,6 +107,7 @@ const bugBounties = [
     payout: "$400",
     year: "2026",
     icon: "/icons/automattic.png",
+    certification: "HackerOne Certified",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
@@ -117,6 +119,7 @@ const bugBounties = [
     payout: "$100",
     year: "2026",
     icon: "/icons/automattic.png",
+    certification: "HackerOne Certified",
     description:
       "CSRF is possible via a nonce-bypass request.",
   },
