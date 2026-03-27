@@ -70,8 +70,8 @@ const bugBounties = [
     grade: "High",
     payout: "$2,938",
     year: "2026",
-    icon: "",
-    lock: true,
+    icon: "/icons/hackerone.svg",
+    certification: "HackerOne Certified",
     description:
       "bypassing authorization checks on an internal write endpoint.",
   },
@@ -82,8 +82,8 @@ const bugBounties = [
     grade: "High",
     payout: "$750",
     year: "2026",
-    icon: "",
-    lock: true,
+    icon: "/icons/hackerone.svg",
+    certification: "HackerOne Certified",
     description:
       "Unauthenticated access and large-scale data exposure are possible through API abuse.",
   },
@@ -371,24 +371,18 @@ export default function Home() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
                       <p className="inline-flex items-center gap-1.5 font-semibold text-ink-100">
-                        {item.lock ? (
-                          <svg
-                            aria-hidden="true"
-                            viewBox="0 0 24 24"
-                            className="h-3.5 w-3.5 text-ink-300"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 11V8a5 5 0 0 1 10 0v3m-9 0h8a2 2 0 0 1 2 2v6H6v-6a2 2 0 0 1 2-2Z" />
-                          </svg>
-                        ) : null}
-                        {!item.lock && item.icon ? (
-                          <Image src={item.icon} alt={item.program} width={12} height={12} className="h-3 w-3" />
+                        {item.icon ? (
+                          <Image src={item.icon} alt={item.program} width={14} height={14} className="h-3.5 w-3.5" />
                         ) : null}
                         {item.program}
                       </p>
                       <p className="mt-1">{item.type}</p>
+                      {item.certification ? (
+                        <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-ink-400">
+                          <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
+                          <span>{item.certification}</span>
+                        </p>
+                      ) : null}
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="font-ui text-xs text-ink-500">{item.year}</span>
