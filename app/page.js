@@ -31,7 +31,8 @@ const vulnerabilities = [
     grade: "High",
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
-    badge: "✅ 200M+ downloads",
+    badge: "200M+ downloads",
+    badgeIcon: "/icons/verified-badge.svg",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
@@ -309,11 +310,24 @@ export default function Home() {
                       <p className="font-ui text-ink-100">{v.id}</p>
                       <p className="mt-1 text-ink-300">{v.title}</p>
                       {v.product || v.badge ? (
-                        <p className="mt-1 text-xs text-ink-400">
-                          {v.product ? v.product : ""}
-                          {v.product && v.badge ? " | " : ""}
-                          {v.badge ? v.badge : ""}
-                        </p>
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-ink-400">
+                          {v.product ? <span>{v.product}</span> : null}
+                          {v.product && v.badge ? <span>|</span> : null}
+                          {v.badge ? (
+                            <span className="inline-flex items-center gap-1">
+                              {v.badgeIcon ? (
+                                <Image
+                                  src={v.badgeIcon}
+                                  alt="verified badge"
+                                  width={12}
+                                  height={12}
+                                  className="h-3 w-3"
+                                />
+                              ) : null}
+                              <span>{v.badge}</span>
+                            </span>
+                          ) : null}
+                        </div>
                       ) : null}
                     </div>
                     <div className="flex items-center gap-3">
