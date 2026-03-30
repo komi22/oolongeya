@@ -36,7 +36,7 @@ const vulnerabilities = [
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
     badgeValue: "200M+ downloads",
-    badgeIcon: "/icons/verified-badge.svg",
+    badgeIcon: "/icons/woocommerce.png",
     description:
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
@@ -69,7 +69,7 @@ const vulnerabilities = [
     title: "Admin Privilege Escalation",
     product: "Report Solution",
     badgeValue: "KISA Certified",
-    badgeIcon: "/icons/verified-badge.svg",
+    badgeIcon: "/icons/kisa.png",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
@@ -80,7 +80,7 @@ const vulnerabilities = [
     title: "Admin Privilege Escalation",
     product: "Report Solution",
     badgeValue: "KISA Certified",
-    badgeIcon: "/icons/verified-badge.svg",
+    badgeIcon: "/icons/kisa.png",
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
