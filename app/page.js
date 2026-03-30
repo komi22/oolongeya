@@ -28,6 +28,8 @@ const workExperiences = [
   },
 ];
 
+const PROCESSING_TEXT = "Being Processed";
+
 const vulnerabilities = [
   {
     id: "CVE-2026-3589",
@@ -54,6 +56,16 @@ const vulnerabilities = [
     id: "CVE-2026-5143",
     scoreValue: "6.5",
     grade: "Medium",
+    title: "Being Processed",
+    product: "Rank Math SEO",
+    badgeValue: "Being Processed",
+    badgeIcon: "/icons/rankmath.png",
+    description: "Being Processed",
+  },
+  {
+    id: "CVE-2026-5151",
+    scoreValue: "7.7",
+    grade: "High",
     title: "Being Processed",
     product: "Rank Math SEO",
     badgeValue: "Being Processed",
@@ -132,6 +144,17 @@ const bugBounties = [
     description: "Being Processed",
   },
   {
+    program: "Rank Math SEO",
+    type: "Being Processed",
+    scoreValue: "7.7",
+    grade: "High",
+    payout: "$300",
+    year: "2026",
+    icon: "/icons/rankmath.png",
+    certification: "Being Processed",
+    description: "Being Processed",
+  },
+  {
     program: "PayPal",
     type: "Open Redirect",
     scoreValue: "3.4",
@@ -183,6 +206,13 @@ function riskText(scoreValue, grade) {
 
 function payoutToNumber(payout) {
   return Number(payout.replace(/[^0-9]/g, "")) || 0;
+}
+
+function asProcessingStamp(value, className = "") {
+  if (value === PROCESSING_TEXT) {
+    return <span className={`processing-stamp ${className}`.trim()}>{value}</span>;
+  }
+  return value;
 }
 
 export default function Home() {
@@ -385,7 +415,7 @@ export default function Home() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
-                      <p className="mt-1 text-ink-300">{v.title}</p>
+                      <p className="mt-1 text-ink-300">{asProcessingStamp(v.title)}</p>
                       {v.product || v.badgeValue ? (
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-400">
                           {v.product ? <span>{v.product}</span> : null}
@@ -398,7 +428,7 @@ export default function Home() {
                               className="h-3 w-3"
                             />
                           ) : null}
-                          {v.badgeValue ? <span>{v.badgeValue}</span> : null}
+                          {v.badgeValue ? asProcessingStamp(v.badgeValue, "text-[10px]") : null}
                         </div>
                       ) : null}
                     </div>
@@ -411,7 +441,7 @@ export default function Home() {
                   </div>
                 </button>
                 <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pt-2" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{v.description}</div>
+                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{asProcessingStamp(v.description)}</div>
                 </div>
               </li>
             );
@@ -452,11 +482,13 @@ export default function Home() {
                         ) : null}
                         {item.program}
                       </p>
-                      <p className="mt-1">{item.type}</p>
+                      <p className="mt-1">{asProcessingStamp(item.type)}</p>
                       {item.certification ? (
                         <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-ink-400">
-                          <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
-                          <span>{item.certification}</span>
+                          {item.certification !== PROCESSING_TEXT ? (
+                            <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
+                          ) : null}
+                          <span>{asProcessingStamp(item.certification)}</span>
                         </p>
                       ) : null}
                     </div>
@@ -472,7 +504,7 @@ export default function Home() {
                   </div>
                 </button>
                 <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pt-2" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{item.description}</div>
+                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{asProcessingStamp(item.description)}</div>
                 </div>
               </li>
             );
