@@ -46,7 +46,7 @@ const vulnerabilities = [
     grade: "High",
     title: "Missing Authorization in Content AI Bulk Action",
     product: "Rank Math SEO",
-    badgeValue: "Wordfence Certified · 3M+ active installs",
+    badgeValue: "3M+ downloads",
     badgeIcon: "/icons/rankmath.png",
     description:
       "A low-privileged authenticated user can enqueue unauthorized post IDs in Content AI bulk actions. This may expose private post content to the external AI request flow and modify victim SEO meta.",
@@ -55,9 +55,9 @@ const vulnerabilities = [
     id: "CVE-2026-5143",
     scoreValue: "6.5",
     grade: "Medium",
-    title: "Authorization Flaw in updateMetaBulk (term path)",
+    title: "Authorization Flaw in updateMetaBulk term path",
     product: "Rank Math SEO",
-    badgeValue: "Wordfence Certified · 3M+ active installs",
+    badgeValue: "3M+ downloads",
     badgeIcon: "/icons/rankmath.png",
     description:
       "The term objectType path lacks proper capability checks and can lead to unauthorized post-title modification under ID-collision conditions, creating integrity impact.",
@@ -113,7 +113,7 @@ const bugBounties = [
   },
   {
     program: "Rank Math SEO",
-    type: "Missing Authorization (Wordfence)",
+    type: "Missing Authorization Wordfence",
     scoreValue: "8.1",
     grade: "High",
     payout: "$300",
@@ -125,10 +125,10 @@ const bugBounties = [
   },
   {
     program: "Rank Math SEO",
-    type: "Unauthorized Content Modification (Wordfence)",
+    type: "Unauthorized Content Modification Wordfence",
     scoreValue: "6.5",
     grade: "Medium",
-    payout: "$300",
+    payout: "$200",
     year: "2026",
     icon: "/icons/rankmath.png",
     certification: "Wordfence Certified",
@@ -161,7 +161,7 @@ const bugBounties = [
   },
   {
     program: "Automattic",
-    type: "Cross-Site Request Forgery (CSRF)",
+    type: "Cross-Site Request Forgery CSRF",
     scoreValue: "3.9",
     grade: "Low",
     payout: "$100",
@@ -182,7 +182,7 @@ function scoreTone(grade) {
 }
 
 function riskText(scoreValue, grade) {
-  return `(${scoreValue}) ${grade}`;
+  return `${scoreValue} ${grade}`;
 }
 
 function payoutToNumber(payout) {
