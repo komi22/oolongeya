@@ -41,6 +41,28 @@ const vulnerabilities = [
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
   {
+    id: "CVE-2026-5133",
+    scoreValue: "8.1",
+    grade: "High",
+    title: "Missing Authorization in Content AI Bulk Action",
+    product: "Rank Math SEO",
+    badgeValue: "Wordfence Certified · 3M+ active installs",
+    badgeIcon: "/icons/rankmath.png",
+    description:
+      "A low-privileged authenticated user can enqueue unauthorized post IDs in Content AI bulk actions. This may expose private post content to the external AI request flow and modify victim SEO meta.",
+  },
+  {
+    id: "CVE-2026-5143",
+    scoreValue: "6.5",
+    grade: "Medium",
+    title: "Authorization Flaw in updateMetaBulk (term path)",
+    product: "Rank Math SEO",
+    badgeValue: "Wordfence Certified · 3M+ active installs",
+    badgeIcon: "/icons/rankmath.png",
+    description:
+      "The term objectType path lacks proper capability checks and can lead to unauthorized post-title modification under ID-collision conditions, creating integrity impact.",
+  },
+  {
     id: "KVE-2026-0321",
     scoreValue: "7.5",
     grade: "High",
@@ -90,6 +112,30 @@ const bugBounties = [
       "Unauthenticated access and large-scale data exposure are possible through API abuse.",
   },
   {
+    program: "Rank Math SEO",
+    type: "Missing Authorization (Wordfence)",
+    scoreValue: "8.1",
+    grade: "High",
+    payout: "$300",
+    year: "2026",
+    icon: "/icons/rankmath.png",
+    certification: "Wordfence Certified",
+    description:
+      "Validated by Wordfence as CVE-2026-5133: unauthorized Content AI bulk actions can process protected post IDs and affect confidentiality and integrity.",
+  },
+  {
+    program: "Rank Math SEO",
+    type: "Unauthorized Content Modification (Wordfence)",
+    scoreValue: "6.5",
+    grade: "Medium",
+    payout: "$300",
+    year: "2026",
+    icon: "/icons/rankmath.png",
+    certification: "Wordfence Certified",
+    description:
+      "Validated by Wordfence as CVE-2026-5143: missing term-path authorization allows unauthorized post-title updates when ID-collision conditions are met.",
+  },
+  {
     program: "PayPal",
     type: "Open Redirect",
     scoreValue: "3.4",
@@ -130,6 +176,7 @@ const bugBounties = [
 function scoreTone(grade) {
   if (grade === "Critical") return "text-rose-400";
   if (grade === "High") return "text-red-400";
+  if (grade === "Medium") return "text-amber-300";
   if (grade === "Low") return "text-sky-400";
   return "text-ink-300";
 }
