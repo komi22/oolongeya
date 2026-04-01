@@ -28,8 +28,6 @@ const workExperiences = [
   },
 ];
 
-const PROCESSING_TEXT = "Being Processed";
-
 const vulnerabilities = [
   {
     id: "CVE-2026-3589",
@@ -46,31 +44,34 @@ const vulnerabilities = [
     id: "CVE-2026-5133",
     scoreValue: "8.1",
     grade: "High",
-    title: "Being Processed",
+    title: "Missing Authorization in Content AI Bulk Actions",
     product: "Rank Math SEO",
-    badgeValue: "Being Processed",
+    badgeValue: "3M+ downloads",
     badgeIcon: "/icons/rankmath.png",
-    description: "Being Processed",
+    description:
+      "A low-privileged user can submit arbitrary post IDs through Content AI bulk actions and trigger unauthorized processing of protected content.",
   },
   {
     id: "CVE-2026-5143",
     scoreValue: "6.5",
     grade: "Medium",
-    title: "Being Processed",
+    title: "Authorization Flaw in updateMetaBulk Endpoint",
     product: "Rank Math SEO",
-    badgeValue: "Being Processed",
+    badgeValue: "3M+ downloads",
     badgeIcon: "/icons/rankmath.png",
-    description: "Being Processed",
+    description:
+      "Insufficient authorization checks in the term path can allow unauthorized post title modification under ID-collision conditions.",
   },
   {
     id: "CVE-2026-5151",
     scoreValue: "7.7",
     grade: "High",
-    title: "Being Processed",
+    title: "Object-Level Authorization Mismatch in updateSchemas",
     product: "Rank Math SEO",
-    badgeValue: "Being Processed",
+    badgeValue: "3M+ downloads",
     badgeIcon: "/icons/rankmath.png",
-    description: "Being Processed",
+    description:
+      "A low-privileged user can pass permission checks with their own object ID and overwrite metadata rows of other users by targeting foreign meta IDs.",
   },
   {
     id: "KVE-2026-0321",
@@ -123,36 +124,39 @@ const bugBounties = [
   },
   {
     program: "Rank Math SEO",
-    type: "Being Processed",
+    type: "Missing Authorization",
     scoreValue: "8.1",
     grade: "High",
-    payout: "$300",
+    payout: "$20",
     year: "2026",
     icon: "/icons/rankmath.png",
-    certification: "Being Processed",
-    description: "Being Processed",
+    certification: "Wordfence Certified",
+    description:
+      "A low-privileged user can queue unauthorized bulk processing on protected posts through Content AI bulk actions.",
   },
   {
     program: "Rank Math SEO",
-    type: "Being Processed",
+    type: "Improper Access Control",
     scoreValue: "6.5",
     grade: "Medium",
-    payout: "$200",
+    payout: "$20",
     year: "2026",
     icon: "/icons/rankmath.png",
-    certification: "Being Processed",
-    description: "Being Processed",
+    certification: "Wordfence Certified",
+    description:
+      "Authorization weakness in updateMetaBulk can lead to unauthorized post title updates in specific ID-collision scenarios.",
   },
   {
     program: "Rank Math SEO",
-    type: "Being Processed",
+    type: "Improper Access Control",
     scoreValue: "7.7",
     grade: "High",
-    payout: "$300",
+    payout: "$20",
     year: "2026",
     icon: "/icons/rankmath.png",
-    certification: "Being Processed",
-    description: "Being Processed",
+    certification: "Wordfence Certified",
+    description:
+      "An object-level authorization mismatch in updateSchemas allows unauthorized overwrite of foreign post metadata.",
   },
   {
     program: "PayPal",
@@ -206,13 +210,6 @@ function riskText(scoreValue, grade) {
 
 function payoutToNumber(payout) {
   return Number(payout.replace(/[^0-9]/g, "")) || 0;
-}
-
-function asProcessingStamp(value, className = "") {
-  if (value === PROCESSING_TEXT) {
-    return <span className={`processing-stamp ${className}`.trim()}>{value}</span>;
-  }
-  return value;
 }
 
 export default function Home() {
@@ -415,7 +412,7 @@ export default function Home() {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
-                      <p className="mt-1 text-ink-300">{asProcessingStamp(v.title)}</p>
+                      <p className="mt-1 text-ink-300">{v.title}</p>
                       {v.product || v.badgeValue ? (
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-400">
                           {v.product ? <span>{v.product}</span> : null}
@@ -428,7 +425,7 @@ export default function Home() {
                               className="h-3 w-3"
                             />
                           ) : null}
-                          {v.badgeValue ? asProcessingStamp(v.badgeValue, "text-[10px]") : null}
+                          {v.badgeValue ? <span>{v.badgeValue}</span> : null}
                         </div>
                       ) : null}
                     </div>
@@ -441,7 +438,7 @@ export default function Home() {
                   </div>
                 </button>
                 <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pt-2" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{asProcessingStamp(v.description)}</div>
+                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{v.description}</div>
                 </div>
               </li>
             );
@@ -482,13 +479,11 @@ export default function Home() {
                         ) : null}
                         {item.program}
                       </p>
-                      <p className="mt-1">{asProcessingStamp(item.type)}</p>
+                      <p className="mt-1">{item.type}</p>
                       {item.certification ? (
                         <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-ink-400">
-                          {item.certification !== PROCESSING_TEXT ? (
-                            <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
-                          ) : null}
-                          <span>{asProcessingStamp(item.certification)}</span>
+                          <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
+                          <span>{item.certification}</span>
                         </p>
                       ) : null}
                     </div>
@@ -504,7 +499,7 @@ export default function Home() {
                   </div>
                 </button>
                 <div className={`grid overflow-hidden transition-all duration-300 ${isOpen ? "grid-rows-[1fr] pt-2" : "grid-rows-[0fr]"}`}>
-                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{asProcessingStamp(item.description)}</div>
+                  <div className="overflow-hidden text-xs leading-relaxed text-ink-400">{item.description}</div>
                 </div>
               </li>
             );
