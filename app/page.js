@@ -81,6 +81,7 @@ const vulnerabilities = [
     product: "Report Solution",
     badgeValue: "KISA Certified",
     badgeIcon: "/icons/kisa.png",
+    payoutKrw: 3300000,
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
@@ -92,6 +93,7 @@ const vulnerabilities = [
     product: "Report Solution",
     badgeValue: "KISA Certified",
     badgeIcon: "/icons/kisa.png",
+    payoutKrw: 3300000,
     description:
       "By taking over admin privileges, restricted features can be controlled.",
   },
@@ -221,7 +223,9 @@ export default function Home() {
   const [heroShift, setHeroShift] = useState(0);
   const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b.payout) - payoutToNumber(a.payout));
   const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item.payout), 0);
+  const bountyTotalKrw = vulnerabilities.reduce((sum, item) => sum + (item.payoutKrw || 0), 0);
   const bountyTotalFormatted = new Intl.NumberFormat("en-US").format(bountyTotal);
+  const bountyTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(bountyTotalKrw);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -433,6 +437,11 @@ export default function Home() {
                       <span className={`font-ui text-xs font-semibold ${scoreTone(v.grade)}`}>
                         {riskText(v.scoreValue, v.grade)}
                       </span>
+                      {v.payoutKrw ? (
+                        <span className="font-ui text-xs text-emerald-400">
+                          ₩{new Intl.NumberFormat("ko-KR").format(v.payoutKrw)}
+                        </span>
+                      ) : null}
                       <span className={`text-ink-500 transition-transform ${isOpen ? "rotate-45" : "rotate-0"}`}>+</span>
                     </div>
                   </div>
@@ -452,7 +461,7 @@ export default function Home() {
           <span>Bug Bounty</span>
         </h2>
         <p className="mt-3 inline-flex w-fit rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
-          Total: ${bountyTotalFormatted}
+          Total: ${bountyTotalFormatted} / ₩{bountyTotalKrwFormatted}
         </p>
         <ul className="mt-5 divide-y divide-ink-700/60">
           {sortedBugBounties.map((item, idx) => {
