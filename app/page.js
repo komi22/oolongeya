@@ -460,11 +460,10 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <div className="mt-3 inline-block">
+        <div className="mt-3 ml-3 inline-block">
           <div className="grid min-w-[180px] grid-cols-[auto_auto] gap-x-5 text-sm font-ui font-semibold leading-6">
-            <span className="text-ink-300">Total</span>
+            <span className="row-span-2 self-center text-ink-300">Total</span>
             <span className="justify-self-end text-emerald-300">${bountyTotalFormatted}</span>
-            <span />
             <span className="justify-self-end text-emerald-300">₩{bountyTotalKrwFormatted}</span>
           </div>
           <div className="mt-1 h-px w-full bg-ink-500/70" />
