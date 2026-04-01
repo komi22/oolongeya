@@ -224,8 +224,11 @@ export default function Home() {
   const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b.payout) - payoutToNumber(a.payout));
   const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item.payout), 0);
   const bountyTotalKrw = vulnerabilities.reduce((sum, item) => sum + (item.payoutKrw || 0), 0);
+  const convertedUsdToKrw = bountyTotal * 1500;
+  const combinedTotalKrw = bountyTotalKrw + convertedUsdToKrw;
   const bountyTotalFormatted = new Intl.NumberFormat("en-US").format(bountyTotal);
   const bountyTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(bountyTotalKrw);
+  const combinedTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(combinedTotalKrw);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -467,6 +470,9 @@ export default function Home() {
             <span className="justify-self-end text-emerald-300">₩{bountyTotalKrwFormatted}</span>
           </div>
           <div className="mt-1 h-px w-full bg-ink-500/70" />
+          <p className="mt-1.5 text-right font-ui text-xs font-semibold text-violet-300/90">
+            Combined Total ₩{combinedTotalKrwFormatted}
+          </p>
         </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
           {sortedBugBounties.map((item, idx) => {
