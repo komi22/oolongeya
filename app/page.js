@@ -460,9 +460,15 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <p className="mt-3 inline-flex w-fit rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 font-ui text-sm font-semibold tracking-wide text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.22)]">
-          Total: ${bountyTotalFormatted} / ₩{bountyTotalKrwFormatted}
-        </p>
+        <div className="mt-3 inline-block">
+          <div className="grid min-w-[180px] grid-cols-[auto_auto] gap-x-5 text-sm font-ui font-semibold leading-6">
+            <span className="text-ink-300">Total</span>
+            <span className="justify-self-end text-emerald-300">${bountyTotalFormatted}</span>
+            <span />
+            <span className="justify-self-end text-emerald-300">₩{bountyTotalKrwFormatted}</span>
+          </div>
+          <div className="mt-1 h-px w-full bg-ink-500/70" />
+        </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
           {sortedBugBounties.map((item, idx) => {
             const isOpen = openBounty === idx;
