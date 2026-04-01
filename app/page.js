@@ -105,7 +105,8 @@ const bugBounties = [
     type: "Improper Access Control",
     scoreValue: "8.7",
     grade: "High",
-    payout: "$2,938",
+    payout: "$?,???",
+    payoutAmount: 2938,
     year: "2026",
     icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
@@ -117,7 +118,8 @@ const bugBounties = [
     type: "Improper Access Control",
     scoreValue: "7.5",
     grade: "High",
-    payout: "$750",
+    payout: "$???",
+    payoutAmount: 750,
     year: "2026",
     icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
@@ -210,8 +212,9 @@ function riskText(scoreValue, grade) {
   return `${scoreValue} ${grade}`;
 }
 
-function payoutToNumber(payout) {
-  return Number(payout.replace(/[^0-9]/g, "")) || 0;
+function payoutToNumber(item) {
+  if (typeof item.payoutAmount === "number") return item.payoutAmount;
+  return Number(item.payout.replace(/[^0-9]/g, "")) || 0;
 }
 
 export default function Home() {
@@ -221,13 +224,11 @@ export default function Home() {
   const [openBounty, setOpenBounty] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroShift, setHeroShift] = useState(0);
-  const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b.payout) - payoutToNumber(a.payout));
-  const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item.payout), 0);
+  const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b) - payoutToNumber(a));
+  const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item), 0);
   const bountyTotalKrw = vulnerabilities.reduce((sum, item) => sum + (item.payoutKrw || 0), 0);
   const convertedUsdToKrw = bountyTotal * 1500;
   const combinedTotalKrw = bountyTotalKrw + convertedUsdToKrw;
-  const bountyTotalFormatted = new Intl.NumberFormat("en-US").format(bountyTotal);
-  const bountyTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(bountyTotalKrw);
   const combinedTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(combinedTotalKrw);
 
   useEffect(() => {
@@ -464,14 +465,8 @@ export default function Home() {
           <span>Bug Bounty</span>
         </h2>
         <div className="mt-3 ml-3 inline-block">
-          <div className="grid min-w-[180px] grid-cols-[auto_auto] gap-x-5 text-sm font-ui font-semibold leading-6">
-            <span className="row-span-2 self-center text-ink-300">Total</span>
-            <span className="justify-self-end text-emerald-300">${bountyTotalFormatted}</span>
-            <span className="justify-self-end text-emerald-300">₩{bountyTotalKrwFormatted}</span>
-          </div>
-          <div className="mt-1 h-px w-full bg-ink-500/70" />
-          <p className="mt-1.5 text-right font-ui text-xs font-semibold text-violet-300/90">
-            Combined Total ₩{combinedTotalKrwFormatted}
+          <p className="font-ui text-sm font-semibold text-emerald-300">
+            Total ₩{combinedTotalKrwFormatted}
           </p>
         </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
