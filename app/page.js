@@ -74,6 +74,17 @@ const vulnerabilities = [
       "A low-privileged user can pass permission checks with their own object ID and overwrite metadata rows of other users by targeting foreign meta IDs.",
   },
   {
+    id: "CVE-2026-5427",
+    scoreValue: "8.8",
+    grade: "High",
+    title: "Contributor SSRF and Upload Restriction Bypass via Block URL Import",
+    product: "Kubio",
+    badgeValue: "WordPress Plugin",
+    badgeIcon: "/icons/kubio.png",
+    description:
+      "A low-privileged contributor can inject attacker-controlled URLs into Kubio block attributes to trigger server-side fetches and save responses into public uploads. This enables SSRF-like access to internal resources and unauthorized data exposure despite normal media upload restrictions.",
+  },
+  {
     id: "KVE-2026-0321",
     scoreValue: "7.5",
     grade: "High",
