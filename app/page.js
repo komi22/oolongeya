@@ -477,7 +477,7 @@ export default function Home() {
         </h2>
         <div className="mt-3 ml-3 inline-block">
           <p className="font-ui text-sm font-semibold text-emerald-300">
-            Total ₩{combinedTotalKrwFormatted}
+            Total ₩ {combinedTotalKrwFormatted}
           </p>
         </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
