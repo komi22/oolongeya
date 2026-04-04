@@ -476,8 +476,8 @@ export default function Home() {
           <span>Bug Bounty</span>
         </h2>
         <div className="mt-3 ml-3 inline-block">
-          <p className="font-ui text-sm font-semibold text-emerald-300">
-            Total ₩ {combinedTotalKrwFormatted}
+          <p className="inline-flex items-center gap-1 rounded-md border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-ui text-sm font-semibold text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.18)]">
+            Total <span role="img" aria-label="banknote">💵</span> : ₩ {combinedTotalKrwFormatted}
           </p>
         </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
