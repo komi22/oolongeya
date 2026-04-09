@@ -30,6 +30,47 @@ const workExperiences = [
 
 const vulnerabilities = [
   {
+    id: "CVE-2026-6019",
+    scoreValue: "5.4",
+    grade: "moderate",
+    title:
+      "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+    product: "python - cpython",
+    productIcon: "/icons/python.svg",
+    verificationLabel: "verification github",
+    verificationIcon: "/icons/github.svg",
+    badgeValue: "72.2k Starred",
+    description:
+      "A vulnerability in CPython may allow cross-site scripting due to improper output handling during web page generation.",
+  },
+  {
+    id: "CVE-2026-[Pending]",
+    scoreValue: "9.4",
+    grade: "Critical",
+    title:
+      "Exposure of Sensitive System Information to an Unauthorized Control Sphere",
+    product: "dgraph-io - dgraph",
+    productIcon: "/icons/dgraph.svg",
+    verificationLabel: "verification github",
+    verificationIcon: "/icons/github.svg",
+    badgeValue: "21.6k Starred",
+    description:
+      "A vulnerability in Dgraph may allow unauthorized administrative access due to improper exposure of sensitive information through a debug interface.",
+  },
+  {
+    id: "CVE-2026-40071",
+    scoreValue: "5.4",
+    grade: "moderate",
+    title: "Incorrect Authorization",
+    product: "pyload",
+    productIcon: "/icons/pyload.svg",
+    verificationLabel: "verification github",
+    verificationIcon: "/icons/github.svg",
+    badgeValue: "3.7k Starred",
+    description:
+      "A vulnerability in pyLoad may allow authenticated low-privileged users to perform unauthorized actions due to incorrect authorization checks in WebUI JSON endpoints.",
+  },
+  {
     id: "CVE-2026-3589",
     scoreValue: "7.5",
     grade: "High",
@@ -212,10 +253,11 @@ const bugBounties = [
 ];
 
 function scoreTone(grade) {
-  if (grade === "Critical") return "text-rose-400";
-  if (grade === "High") return "text-red-400";
-  if (grade === "Medium") return "text-amber-300";
-  if (grade === "Low") return "text-sky-400";
+  const normalized = String(grade).toLowerCase();
+  if (normalized === "critical") return "text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.45)]";
+  if (normalized === "high") return "text-red-400";
+  if (normalized === "medium" || normalized === "moderate") return "text-amber-300";
+  if (normalized === "low") return "text-sky-400";
   return "text-ink-300";
 }
 
@@ -432,10 +474,36 @@ export default function Home() {
                     <div>
                       <p className="font-ui text-ink-100">{v.id}</p>
                       <p className="mt-1 text-ink-300">{v.title}</p>
-                      {v.product || v.badgeValue ? (
+                      {v.product || v.badgeValue || v.verificationLabel ? (
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-400">
-                          {v.product ? <span>{v.product}</span> : null}
-                          {v.badgeIcon ? (
+                          {v.product ? (
+                            <span className="inline-flex items-center gap-1">
+                              {v.productIcon ? (
+                                <Image
+                                  src={v.productIcon}
+                                  alt={`${v.product} icon`}
+                                  width={12}
+                                  height={12}
+                                  className="h-3 w-3"
+                                />
+                              ) : null}
+                              <span>{v.product}</span>
+                            </span>
+                          ) : null}
+                          {v.verificationLabel ? (
+                            <span className="inline-flex items-center gap-1">
+                              {v.verificationIcon ? (
+                                <Image
+                                  src={v.verificationIcon}
+                                  alt={v.verificationLabel}
+                                  width={12}
+                                  height={12}
+                                  className="h-3 w-3"
+                                />
+                              ) : null}
+                              <span>{v.verificationLabel}</span>
+                            </span>
+                          ) : v.badgeIcon ? (
                             <Image
                               src={v.badgeIcon}
                               alt="verification"
