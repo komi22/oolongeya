@@ -39,7 +39,6 @@ const vulnerabilities = [
     productIcon: "/icons/python.svg",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
-    badgeValue: "72.2k",
     description:
       "A vulnerability in CPython may allow cross-site scripting due to improper output handling during web page generation.",
   },
@@ -53,7 +52,6 @@ const vulnerabilities = [
     productIcon: "/icons/dgraph.svg",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
-    badgeValue: "21.6k",
     description:
       "A vulnerability in Dgraph may allow unauthorized administrative access due to improper exposure of sensitive information through a debug interface.",
   },
@@ -66,7 +64,6 @@ const vulnerabilities = [
     productIcon: "/icons/pyload.svg",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
-    badgeValue: "3.7k",
     description:
       "A vulnerability in pyLoad may allow authenticated low-privileged users to perform unauthorized actions due to incorrect authorization checks in WebUI JSON endpoints.",
   },
