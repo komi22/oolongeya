@@ -32,7 +32,7 @@ const vulnerabilities = [
   {
     id: "CVE-2026-6019",
     scoreValue: "5.4",
-    grade: "moderate",
+    grade: "Medium",
     title:
       "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
     product: "python - cpython",
@@ -60,7 +60,7 @@ const vulnerabilities = [
   {
     id: "CVE-2026-40071",
     scoreValue: "5.4",
-    grade: "moderate",
+    grade: "Medium",
     title: "Incorrect Authorization",
     product: "pyload",
     productIcon: "/icons/pyload.svg",
@@ -256,7 +256,7 @@ function scoreTone(grade) {
   const normalized = String(grade).toLowerCase();
   if (normalized === "critical") return "text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.45)]";
   if (normalized === "high") return "text-red-400";
-  if (normalized === "medium" || normalized === "moderate") return "text-amber-300";
+  if (normalized === "medium") return "text-amber-300";
   if (normalized === "low") return "text-sky-400";
   return "text-ink-300";
 }
