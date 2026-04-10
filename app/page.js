@@ -30,17 +30,17 @@ const workExperiences = [
 
 const vulnerabilities = [
   {
-    id: "CVE-2026-6019",
-    scoreValue: "5.4",
-    grade: "Medium",
+    id: "CVE-*",
+    scoreValue: "*",
+    grade: "*",
     title:
-      "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
-    product: "python - cpython",
-    productIcon: "/icons/python.svg",
+      "*",
+    product: "*******",
+    productIcon: "",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
     description:
-      "A vulnerability in CPython may allow cross-site scripting due to improper output handling during web page generation.",
+      "*",
   },
   {
     id: "CVE-2026-[Pending]",
@@ -48,12 +48,12 @@ const vulnerabilities = [
     grade: "Critical",
     title:
       "Exposure of Sensitive System Information to an Unauthorized Control Sphere",
-    product: "dgraph-io - dgraph",
+    product: "*",
     productIcon: "/icons/dgraph.svg",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
     description:
-      "A vulnerability in Dgraph may allow unauthorized administrative access due to improper exposure of sensitive information through a debug interface.",
+      "*",
   },
   {
     id: "CVE-2026-40071",
