@@ -34,7 +34,7 @@ const vulnerabilities = [
     scoreValue: "9.4",
     grade: "Critical",
     title:
-      "Unauthenticated /debug/pprof/cmdline discloses admin auth token, enabling unauthorized access to protected Alpha admin endpoints",
+      "Unauthenticated part discloses admin auth token, enabling unauthorized access to protected Alpha admin endpoints",
     product: "dgraph",
     productIcon: "",
     verificationLabel: "Github Certified",
