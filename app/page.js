@@ -30,42 +30,42 @@ const workExperiences = [
 
 const vulnerabilities = [
   {
-    id: "CVE-*",
-    scoreValue: "*",
-    grade: "*",
+    id: "CVE-2026-40173",
+    scoreValue: "9.4",
+    grade: "Critical",
     title:
-      "*",
-    product: "*******",
+      "Unauthenticated /debug/pprof/cmdline discloses admin auth token, enabling unauthorized access to protected Alpha admin endpoints",
+    product: "dgraph",
     productIcon: "",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
     description:
-      "*",
+      "An unauthenticated debug endpoint in Dgraph Alpha exposes the full process command line, including the configured admin token",
   },
   {
-    id: "*",
-    scoreValue: "",
-    grade: "",
-    title:
-      "",
-    product: "*",
-    productIcon: "",
-    verificationLabel: "Github Certified",
-    verificationIcon: "/icons/github.svg",
-    description:
-      "*",
-  },
-  {
-    id: "",
-    scoreValue: "",
+    id: "CVE-2026-40071",
+    scoreValue: "5.4",
     grade: "Medium",
-    title: "Incorrect Authorization",
-    product: "",
+    title:
+      "pyLoad WebUI JSON permission mismatch lets ADD/DELETE users invoke MODIFY-only actions",
+    product: "pyLoad",
     productIcon: "",
     verificationLabel: "Github Certified",
     verificationIcon: "/icons/github.svg",
     description:
-      "",
+      "pyLoad is a free and open-source download manager written in Python. Prior to 0.5.0b3.dev97, the /json/package_order, /json/link_order, and /json/abort_link WebUI JSON endpoints enforce weaker permissions than the core API methods they invoke. This allows authenticated low-privileged users to execute MODIFY operations that should be denied by pyLoad's own permission model.",
+  },
+  {
+    id: "CVE-2026-41133",
+    scoreValue: "8.8",
+    grade: "High",
+    title: "Stale Session Privilege After Role/Permission Change",
+    product: "pyload-ng",
+    productIcon: "",
+    verificationLabel: "Github Certified",
+    verificationIcon: "/icons/github.svg",
+    description:
+      "already logged-in user can keep old (revoked) privileges until logout/session expiry, enabling continued privileged actions.",
   },
   {
     id: "CVE-2026-3589",
