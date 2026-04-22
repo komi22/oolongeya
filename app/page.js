@@ -169,14 +169,13 @@ const vulnerabilityAreaMeta = {
 const bugBountyAreaMeta = {
   All: { icon: "/icons/verified-badge.svg" },
   WordPress: { icon: "/icons/woocommerce.png" },
-  Web: { icon: "/icons/paypal.svg" },
-  Private: { icon: "/icons/hackerone.svg" },
+  HackerOne: { icon: "/icons/hackerone.svg" },
 };
 
 const bugBounties = [
   {
     id: "BB-2026-001",
-    area: "Private",
+    area: "HackerOne",
     program: "Private Program",
     type: "Improper Access Control",
     scoreValue: "8.7",
@@ -191,7 +190,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-002",
-    area: "Private",
+    area: "HackerOne",
     program: "Private Program",
     type: "Improper Access Control",
     scoreValue: "7.5",
@@ -248,14 +247,14 @@ const bugBounties = [
   },
   {
     id: "BB-2026-006",
-    area: "Web",
+    area: "HackerOne",
     program: "PayPal",
     type: "Open Redirect",
     scoreValue: "3.4",
     grade: "Low",
     payout: "$400",
     year: "2026",
-    icon: "/icons/paypal.svg",
+    icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
     description:
       "A malicious phishing link under a PayPal domain can be generated and redirect users to a malicious site when clicked.",
@@ -290,7 +289,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-009",
-    area: "Web",
+    area: "HackerOne",
     program: "Spotify",
     type: "Improper Access Control",
     scoreValue: "6.8",
@@ -298,7 +297,7 @@ const bugBounties = [
     payout: "$200",
     payoutAmount: 200,
     year: "2026",
-    icon: "/icons/spotify.svg",
+    icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
     description:
       "Some paywalled episodes returned media URLs and file IDs without authentication, while other PAYMENT_REQUIRED episodes were properly blocked.",
@@ -689,7 +688,6 @@ export default function Home() {
         <ul className="mt-5 divide-y divide-ink-700/60">
           {filteredBugBounties.map((item) => {
             const isOpen = openBountyId === item.id;
-            const areaIcon = bugBountyAreaMeta[item.area]?.icon;
             return (
               <li key={item.id} className="mood-card py-3 px-2 text-sm text-ink-300 sm:px-3">
                 <button
@@ -713,22 +711,8 @@ export default function Home() {
                         {item.program}
                       </p>
                       <p className="mt-1">{item.type}</p>
-                      {item.area ? (
-                        <p className="mt-1 inline-flex items-center gap-1 rounded-full border border-ink-600/70 bg-ink-800/45 px-2 py-0.5 text-[11px] text-ink-200">
-                          {areaIcon ? (
-                            <Image
-                              src={areaIcon}
-                              alt={`${item.area} icon`}
-                              width={11}
-                              height={11}
-                              className="h-[11px] w-[11px] rounded-sm object-cover"
-                            />
-                          ) : null}
-                          <span>{item.area}</span>
-                        </p>
-                      ) : null}
                       {item.certification ? (
-                        <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-ink-400">
+                        <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-ink-400">
                           <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
                           <span>{item.certification}</span>
                         </p>
