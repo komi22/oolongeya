@@ -132,8 +132,8 @@ const vulnerabilities = [
   },
   {
     id: "KVE-2026-0321",
-    scoreValue: "7.5",
-    grade: "High",
+    scoreValue: "",
+    grade: "Medium",
     area: "KISA",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
@@ -145,8 +145,8 @@ const vulnerabilities = [
   },
   {
     id: "KVE-2026-0318",
-    scoreValue: "7.5",
-    grade: "High",
+    scoreValue: "",
+    grade: "Medium",
     area: "KISA",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
@@ -315,6 +315,7 @@ function scoreTone(grade) {
 }
 
 function riskText(scoreValue, grade) {
+  if (!scoreValue) return `${grade}`;
   return `${scoreValue} ${grade}`;
 }
 
