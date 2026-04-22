@@ -298,7 +298,7 @@ const bugBounties = [
     payout: "$200",
     payoutAmount: 200,
     year: "2026",
-    icon: "/icons/hackerone.svg",
+    icon: "/icons/spotify.svg",
     certification: "HackerOne Certified",
     description:
       "Some paywalled episodes returned media URLs and file IDs without authentication, while other PAYMENT_REQUIRED episodes were properly blocked.",
