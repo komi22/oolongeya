@@ -292,7 +292,7 @@ const bugBounties = [
     id: "BB-2026-009",
     area: "Web",
     program: "Spotify",
-    type: "Unauthenticated ****** bypass in ****** allows extraction of paywalled episode media URLs and encrypted full media",
+    type: "Improper Access Control",
     scoreValue: "6.8",
     grade: "Medium",
     payout: "$200",
@@ -301,7 +301,7 @@ const bugBounties = [
     icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
     description:
-      "For certain paywalled episodes, the endpoint returns ****** and ****** without authentication. This is not a normal public behavior because other episodes in the same PAYMENT_REQUIRED class are correctly blocked.",
+      "Some paywalled episodes returned media URLs and file IDs without authentication, while other PAYMENT_REQUIRED episodes were properly blocked.",
   },
 ];
 
