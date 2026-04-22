@@ -31,7 +31,7 @@ module.exports = {
       fontFamily: {
         display: ["var(--font-display)"],
         ui: ["var(--font-ui)"],
-        ko: ["var(--font-ko)"],
+        ko: ["var(--font-ui)"],
         mono: ["var(--font-mono)"],
       },
       boxShadow: {

@@ -1,27 +1,17 @@
-﻿import { Inter, JetBrains_Mono, Montserrat, Nanum_Gothic } from "next/font/google";
+import localFont from "next/font/local";
+import { JetBrains_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 
-const bodyFont = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const bodyFont = localFont({
+  src: "./fonts/x12y12pxMaruMinyaHangul.woff2",
+  display: "swap",
+  variable: "--font-ui",
 });
 
 const displayFont = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-display",
-});
-
-const uiFont = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-ui",
-});
-
-const koFont = Nanum_Gothic({
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-  variable: "--font-ko",
 });
 
 const monoFont = JetBrains_Mono({
@@ -39,7 +29,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${bodyFont.className} ${displayFont.variable} ${uiFont.variable} ${koFont.variable} ${monoFont.variable} grain`}>
+      <body className={`${bodyFont.className} ${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} grain`}>
         {children}
       </body>
     </html>
