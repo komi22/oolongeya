@@ -168,7 +168,7 @@ const vulnerabilityAreaMeta = {
 
 const bugBountyAreaMeta = {
   All: { icon: "/icons/verified-badge.svg" },
-  WordPress: { icon: "/icons/woocommerce.png" },
+  Wordfence: { icon: "/icons/wordfence.svg" },
   HackerOne: { icon: "/icons/hackerone.svg" },
 };
 
@@ -205,7 +205,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-003",
-    area: "WordPress",
+    area: "Wordfence",
     program: "Rank Math SEO",
     type: "Missing Authorization",
     scoreValue: "8.1",
@@ -219,7 +219,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-004",
-    area: "WordPress",
+    area: "Wordfence",
     program: "Rank Math SEO",
     type: "Improper Access Control",
     scoreValue: "6.5",
@@ -233,7 +233,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-005",
-    area: "WordPress",
+    area: "Wordfence",
     program: "Rank Math SEO",
     type: "Improper Access Control",
     scoreValue: "7.7",
@@ -261,7 +261,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-007",
-    area: "WordPress",
+    area: "HackerOne",
     program: "Automattic",
     type: "Improper Access Control",
     scoreValue: "7.5",
@@ -275,7 +275,7 @@ const bugBounties = [
   },
   {
     id: "BB-2026-008",
-    area: "WordPress",
+    area: "HackerOne",
     program: "Automattic",
     type: "Cross-Site Request Forgery CSRF",
     scoreValue: "3.9",
