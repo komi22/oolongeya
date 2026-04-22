@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const sectionLinks = [
   ["work-experience", "Experience"],
@@ -33,6 +33,7 @@ const vulnerabilities = [
     id: "CVE-2026-40173",
     scoreValue: "9.4",
     grade: "Critical",
+    area: "Open Source",
     title:
       "Unauthenticated part discloses admin auth token, enabling unauthorized access to protected Alpha admin endpoints",
     product: "dgraph",
@@ -46,6 +47,7 @@ const vulnerabilities = [
     id: "CVE-2026-40071",
     scoreValue: "5.4",
     grade: "Medium",
+    area: "Python",
     title:
       "pyLoad WebUI JSON permission mismatch lets ADD/DELETE users invoke MODIFY-only actions",
     product: "pyLoad",
@@ -59,6 +61,7 @@ const vulnerabilities = [
     id: "CVE-2026-41133",
     scoreValue: "8.8",
     grade: "High",
+    area: "Python",
     title: "Stale Session Privilege After Role/Permission Change",
     product: "pyload-ng",
     productIcon: "",
@@ -71,6 +74,7 @@ const vulnerabilities = [
     id: "CVE-2026-3589",
     scoreValue: "7.5",
     grade: "High",
+    area: "WordPress",
     title: "Arbitrary Admin User Creation via CSRF",
     product: "WooCommerce",
     badgeValue: "200M+ downloads",
@@ -82,6 +86,7 @@ const vulnerabilities = [
     id: "CVE-2026-5133",
     scoreValue: "8.1",
     grade: "High",
+    area: "WordPress",
     title: "Missing Authorization in Content AI Bulk Actions",
     product: "Rank Math SEO",
     badgeValue: "3M+ downloads",
@@ -93,6 +98,7 @@ const vulnerabilities = [
     id: "CVE-2026-5143",
     scoreValue: "6.5",
     grade: "Medium",
+    area: "WordPress",
     title: "Authorization Flaw in updateMetaBulk Endpoint",
     product: "Rank Math SEO",
     badgeValue: "3M+ downloads",
@@ -104,6 +110,7 @@ const vulnerabilities = [
     id: "CVE-2026-5151",
     scoreValue: "7.7",
     grade: "High",
+    area: "WordPress",
     title: "Object-Level Authorization Mismatch in updateSchemas",
     product: "Rank Math SEO",
     badgeValue: "3M+ downloads",
@@ -115,6 +122,7 @@ const vulnerabilities = [
     id: "CVE-2026-5427",
     scoreValue: "8.8",
     grade: "High",
+    area: "WordPress",
     title: "Contributor SSRF and Upload Restriction Bypass via Block URL Import",
     product: "Kubio",
     badgeValue: "WordPress Plugin",
@@ -126,6 +134,7 @@ const vulnerabilities = [
     id: "KVE-2026-0321",
     scoreValue: "7.5",
     grade: "High",
+    area: "KISA",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
     badgeValue: "KISA Certified",
@@ -138,6 +147,7 @@ const vulnerabilities = [
     id: "KVE-2026-0318",
     scoreValue: "7.5",
     grade: "High",
+    area: "KISA",
     title: "Admin Privilege Escalation",
     product: "Report Solution",
     badgeValue: "KISA Certified",
@@ -147,6 +157,14 @@ const vulnerabilities = [
       "By taking over admin privileges, restricted features can be controlled.",
   },
 ];
+
+const vulnerabilityAreaMeta = {
+  All: { icon: "/icons/verified-badge.svg" },
+  WordPress: { icon: "/icons/woocommerce.png" },
+  Python: { icon: "/icons/python.svg" },
+  "Open Source": { icon: "/icons/github.svg" },
+  KISA: { icon: "/icons/kisa.png" },
+};
 
 const bugBounties = [
   {
@@ -270,10 +288,19 @@ function payoutToNumber(item) {
 export default function Home() {
   const [activeSection, setActiveSection] = useState("work-experience");
   const [openExp, setOpenExp] = useState(0);
-  const [openVuln, setOpenVuln] = useState(0);
+  const [selectedVulnArea, setSelectedVulnArea] = useState("All");
+  const [openVulnId, setOpenVulnId] = useState(vulnerabilities[0]?.id ?? null);
   const [openBounty, setOpenBounty] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroShift, setHeroShift] = useState(0);
+  const vulnerabilityAreas = useMemo(
+    () => ["All", ...Array.from(new Set(vulnerabilities.map((item) => item.area)))],
+    [],
+  );
+  const filteredVulnerabilities = useMemo(() => {
+    if (selectedVulnArea === "All") return vulnerabilities;
+    return vulnerabilities.filter((item) => item.area === selectedVulnArea);
+  }, [selectedVulnArea]);
   const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b) - payoutToNumber(a));
   const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item), 0);
   const bountyTotalKrw = vulnerabilities.reduce((sum, item) => sum + (item.payoutKrw || 0), 0);
@@ -330,6 +357,11 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const hasOpenCard = filteredVulnerabilities.some((item) => item.id === openVulnId);
+    if (!hasOpenCard) setOpenVulnId(filteredVulnerabilities[0]?.id ?? null);
+  }, [filteredVulnerabilities, openVulnId]);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-8" lang="en">
@@ -456,16 +488,41 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Vulnerability Reports</span>
         </h2>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {vulnerabilityAreas.map((area) => {
+            const isActive = selectedVulnArea === area;
+            const areaCount = area === "All"
+              ? vulnerabilities.length
+              : vulnerabilities.filter((item) => item.area === area).length;
+            const areaIcon = vulnerabilityAreaMeta[area]?.icon;
+
+            return (
+              <button
+                key={area}
+                type="button"
+                className={`area-filter-btn ${isActive ? "active" : ""}`}
+                onClick={() => setSelectedVulnArea(area)}
+              >
+                {areaIcon ? (
+                  <Image src={areaIcon} alt={`${area} icon`} width={13} height={13} className="h-[13px] w-[13px] rounded-sm object-cover" />
+                ) : null}
+                <span>{area}</span>
+                <span className="text-[11px] text-ink-500">({areaCount})</span>
+              </button>
+            );
+          })}
+        </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
-          {vulnerabilities.map((v, idx) => {
-            const isOpen = openVuln === idx;
+          {filteredVulnerabilities.map((v) => {
+            const isOpen = openVulnId === v.id;
+            const areaIcon = vulnerabilityAreaMeta[v.area]?.icon;
             return (
               <li key={v.id} className="mood-card py-3 px-2 text-sm sm:px-3">
                 <button
                   type="button"
                   className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
                   aria-expanded={isOpen}
-                  onClick={() => setOpenVuln(isOpen ? -1 : idx)}
+                  onClick={() => setOpenVulnId(isOpen ? null : v.id)}
                 >
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
@@ -473,6 +530,20 @@ export default function Home() {
                       <p className="mt-1 text-ink-300">{v.title}</p>
                       {v.product || v.badgeValue || v.verificationLabel ? (
                         <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-400">
+                          {v.area ? (
+                            <span className="inline-flex items-center gap-1 rounded-full border border-ink-600/70 bg-ink-800/45 px-2 py-0.5 text-[11px] text-ink-200">
+                              {areaIcon ? (
+                                <Image
+                                  src={areaIcon}
+                                  alt={`${v.area} icon`}
+                                  width={11}
+                                  height={11}
+                                  className="h-[11px] w-[11px] rounded-sm object-cover"
+                                />
+                              ) : null}
+                              <span>{v.area}</span>
+                            </span>
+                          ) : null}
                           {v.product ? (
                             <span className="inline-flex items-center gap-1">
                               {v.productIcon ? (
