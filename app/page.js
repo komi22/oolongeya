@@ -166,8 +166,17 @@ const vulnerabilityAreaMeta = {
   KISA: { icon: "/icons/kisa.png" },
 };
 
+const bugBountyAreaMeta = {
+  All: { icon: "/icons/verified-badge.svg" },
+  WordPress: { icon: "/icons/woocommerce.png" },
+  Web: { icon: "/icons/paypal.svg" },
+  Private: { icon: "/icons/hackerone.svg" },
+};
+
 const bugBounties = [
   {
+    id: "BB-2026-001",
+    area: "Private",
     program: "Private Program",
     type: "Improper Access Control",
     scoreValue: "8.7",
@@ -181,6 +190,8 @@ const bugBounties = [
       "Private",
   },
   {
+    id: "BB-2026-002",
+    area: "Private",
     program: "Private Program",
     type: "Improper Access Control",
     scoreValue: "7.5",
@@ -194,6 +205,8 @@ const bugBounties = [
       "Private",
   },
   {
+    id: "BB-2026-003",
+    area: "WordPress",
     program: "Rank Math SEO",
     type: "Missing Authorization",
     scoreValue: "8.1",
@@ -206,6 +219,8 @@ const bugBounties = [
       "A low-privileged user can queue unauthorized bulk processing on protected posts through Content AI bulk actions.",
   },
   {
+    id: "BB-2026-004",
+    area: "WordPress",
     program: "Rank Math SEO",
     type: "Improper Access Control",
     scoreValue: "6.5",
@@ -218,6 +233,8 @@ const bugBounties = [
       "Authorization weakness in updateMetaBulk can lead to unauthorized post title updates in specific ID-collision scenarios.",
   },
   {
+    id: "BB-2026-005",
+    area: "WordPress",
     program: "Rank Math SEO",
     type: "Improper Access Control",
     scoreValue: "7.7",
@@ -230,6 +247,8 @@ const bugBounties = [
       "An object-level authorization mismatch in updateSchemas allows unauthorized overwrite of foreign post metadata.",
   },
   {
+    id: "BB-2026-006",
+    area: "Web",
     program: "PayPal",
     type: "Open Redirect",
     scoreValue: "3.4",
@@ -242,6 +261,8 @@ const bugBounties = [
       "A malicious phishing link under a PayPal domain can be generated and redirect users to a malicious site when clicked.",
   },
   {
+    id: "BB-2026-007",
+    area: "WordPress",
     program: "Automattic",
     type: "Improper Access Control",
     scoreValue: "7.5",
@@ -254,6 +275,8 @@ const bugBounties = [
       "The plugin does not properly handle batch requests, which could allow unauthenticated users to make a logged in admin call non store/WC REST endpoints, and create arbitrary admin users via a CSRF attack for example.",
   },
   {
+    id: "BB-2026-008",
+    area: "WordPress",
     program: "Automattic",
     type: "Cross-Site Request Forgery CSRF",
     scoreValue: "3.9",
@@ -264,6 +287,21 @@ const bugBounties = [
     certification: "HackerOne Certified",
     description:
       "CSRF is possible via a nonce-bypass request.",
+  },
+  {
+    id: "BB-2026-009",
+    area: "Web",
+    program: "Spotify",
+    type: "Unauthenticated ****** bypass in ****** allows extraction of paywalled episode media URLs and encrypted full media",
+    scoreValue: "6.8",
+    grade: "Medium",
+    payout: "$200",
+    payoutAmount: 200,
+    year: "2026",
+    icon: "/icons/hackerone.svg",
+    certification: "HackerOne Certified",
+    description:
+      "For certain paywalled episodes, the endpoint returns ****** and ****** without authentication. This is not a normal public behavior because other episodes in the same PAYMENT_REQUIRED class are correctly blocked.",
   },
 ];
 
@@ -290,7 +328,8 @@ export default function Home() {
   const [openExp, setOpenExp] = useState(0);
   const [selectedVulnArea, setSelectedVulnArea] = useState("All");
   const [openVulnId, setOpenVulnId] = useState(vulnerabilities[0]?.id ?? null);
-  const [openBounty, setOpenBounty] = useState(0);
+  const [selectedBountyArea, setSelectedBountyArea] = useState("All");
+  const [openBountyId, setOpenBountyId] = useState(bugBounties[0]?.id ?? null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroShift, setHeroShift] = useState(0);
   const vulnerabilityAreas = useMemo(
@@ -301,12 +340,18 @@ export default function Home() {
     if (selectedVulnArea === "All") return vulnerabilities;
     return vulnerabilities.filter((item) => item.area === selectedVulnArea);
   }, [selectedVulnArea]);
-  const sortedBugBounties = [...bugBounties].sort((a, b) => payoutToNumber(b) - payoutToNumber(a));
-  const bountyTotal = sortedBugBounties.reduce((sum, item) => sum + payoutToNumber(item), 0);
-  const bountyTotalKrw = vulnerabilities.reduce((sum, item) => sum + (item.payoutKrw || 0), 0);
-  const convertedUsdToKrw = bountyTotal * 1500;
-  const combinedTotalKrw = bountyTotalKrw + convertedUsdToKrw;
-  const combinedTotalKrwFormatted = new Intl.NumberFormat("ko-KR").format(combinedTotalKrw);
+  const sortedBugBounties = useMemo(
+    () => [...bugBounties].sort((a, b) => payoutToNumber(b) - payoutToNumber(a)),
+    [],
+  );
+  const bugBountyAreas = useMemo(
+    () => ["All", ...Array.from(new Set(sortedBugBounties.map((item) => item.area)))],
+    [sortedBugBounties],
+  );
+  const filteredBugBounties = useMemo(() => {
+    if (selectedBountyArea === "All") return sortedBugBounties;
+    return sortedBugBounties.filter((item) => item.area === selectedBountyArea);
+  }, [selectedBountyArea, sortedBugBounties]);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -362,6 +407,11 @@ export default function Home() {
     const hasOpenCard = filteredVulnerabilities.some((item) => item.id === openVulnId);
     if (!hasOpenCard) setOpenVulnId(filteredVulnerabilities[0]?.id ?? null);
   }, [filteredVulnerabilities, openVulnId]);
+
+  useEffect(() => {
+    const hasOpenCard = filteredBugBounties.some((item) => item.id === openBountyId);
+    if (!hasOpenCard) setOpenBountyId(filteredBugBounties[0]?.id ?? null);
+  }, [filteredBugBounties, openBountyId]);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-8" lang="en">
@@ -611,21 +661,41 @@ export default function Home() {
           <span className="-translate-y-px text-base leading-none text-accent">•</span>
           <span>Bug Bounty</span>
         </h2>
-        <div className="mt-3 ml-3 inline-block">
-          <p className="inline-flex items-center gap-1 rounded-md border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-ui text-sm font-semibold text-emerald-300 shadow-[0_0_14px_rgba(16,185,129,0.18)]">
-            Total <span role="img" aria-label="banknote">💵</span> : ₩ {combinedTotalKrwFormatted}
-          </p>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {bugBountyAreas.map((area) => {
+            const isActive = selectedBountyArea === area;
+            const areaCount = area === "All"
+              ? sortedBugBounties.length
+              : sortedBugBounties.filter((item) => item.area === area).length;
+            const areaIcon = bugBountyAreaMeta[area]?.icon;
+
+            return (
+              <button
+                key={area}
+                type="button"
+                className={`area-filter-btn ${isActive ? "active" : ""}`}
+                onClick={() => setSelectedBountyArea(area)}
+              >
+                {areaIcon ? (
+                  <Image src={areaIcon} alt={`${area} icon`} width={13} height={13} className="h-[13px] w-[13px] rounded-sm object-cover" />
+                ) : null}
+                <span>{area}</span>
+                <span className="text-[11px] text-ink-500">({areaCount})</span>
+              </button>
+            );
+          })}
         </div>
         <ul className="mt-5 divide-y divide-ink-700/60">
-          {sortedBugBounties.map((item, idx) => {
-            const isOpen = openBounty === idx;
+          {filteredBugBounties.map((item) => {
+            const isOpen = openBountyId === item.id;
+            const areaIcon = bugBountyAreaMeta[item.area]?.icon;
             return (
-              <li key={`${item.program}-${item.type}-${item.payout}`} className="mood-card py-3 px-2 text-sm text-ink-300 sm:px-3">
+              <li key={item.id} className="mood-card py-3 px-2 text-sm text-ink-300 sm:px-3">
                 <button
                   type="button"
                   className="mood-hover w-full text-left transition-all duration-200 hover:translate-x-1 active:translate-x-0"
                   aria-expanded={isOpen}
-                  onClick={() => setOpenBounty(isOpen ? -1 : idx)}
+                  onClick={() => setOpenBountyId(isOpen ? null : item.id)}
                 >
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                     <div>
@@ -642,6 +712,20 @@ export default function Home() {
                         {item.program}
                       </p>
                       <p className="mt-1">{item.type}</p>
+                      {item.area ? (
+                        <p className="mt-1 inline-flex items-center gap-1 rounded-full border border-ink-600/70 bg-ink-800/45 px-2 py-0.5 text-[11px] text-ink-200">
+                          {areaIcon ? (
+                            <Image
+                              src={areaIcon}
+                              alt={`${item.area} icon`}
+                              width={11}
+                              height={11}
+                              className="h-[11px] w-[11px] rounded-sm object-cover"
+                            />
+                          ) : null}
+                          <span>{item.area}</span>
+                        </p>
+                      ) : null}
                       {item.certification ? (
                         <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-ink-400">
                           <Image src="/icons/verified-badge.svg" alt="certification badge" width={12} height={12} className="h-3 w-3" />
