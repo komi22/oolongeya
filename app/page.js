@@ -252,7 +252,7 @@ const bugBounties = [
     type: "Open Redirect",
     scoreValue: "3.4",
     grade: "Low",
-    payout: "$400",
+    payout: "$800",
     year: "2026",
     icon: "/icons/hackerone.svg",
     certification: "HackerOne Certified",
