@@ -95,6 +95,20 @@ const vulnerabilities = [
       "A low-privileged user can submit arbitrary post IDs through Content AI bulk actions and trigger unauthorized processing of protected content.",
   },
   {
+    id: "CVE-2026-44226",
+    scoreValue: "5.3",
+    grade: "Medium",
+    area: "Python",
+    title:
+      "Unauthenticated traceback disclosure via global exception handler in WebUI",
+    product: "pyLoad",
+    productIcon: "",
+    verificationLabel: "Github Certified",
+    verificationIcon: "/icons/github.svg",
+    description:
+      "unauthenticated user can reliably trigger a server exception.",
+  },
+  {
     id: "CVE-2026-5143",
     scoreValue: "6.5",
     grade: "Medium",
@@ -129,6 +143,18 @@ const vulnerabilities = [
     badgeIcon: "/icons/kubio.png",
     description:
       "A low-privileged contributor can inject attacker-controlled URLs into Kubio block attributes to trigger server-side fetches and save responses into public uploads. This enables SSRF-like access to internal resources and unauthorized data exposure despite normal media upload restrictions.",
+  },
+  {
+    id: "CVE-2026-8685",
+    scoreValue: "?",
+    grade: "?",
+    area: "WordPress",
+    title: "Authenticated (Subscriber+) SQL Injection via 'orderby' Parameter",
+    product: "Infility Global",
+    badgeValue: "WordPress Plugin",
+    badgeIcon: "/icons/kubio.png",
+    description:
+      "Subscriber can inject SQL (time-based blind confirmed), which can be used to extract sensitive database data and potentially lead to privilege escalation.",
   },
   {
     id: "KVE-2026-0321",
